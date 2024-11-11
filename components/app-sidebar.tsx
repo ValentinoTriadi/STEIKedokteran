@@ -1,7 +1,8 @@
 'use client'
 
+import Image from "next/image"
+import Logo from '@/public/LogoColor.png'
 import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
-
 import {
   Sidebar,
   SidebarContent,
@@ -46,7 +47,15 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent className="bg-[#5a56f4]">
         <SidebarGroup>
-          <SidebarGroupLabel className="text-white poppins-bold text-xl">Medify Chatbot</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-white poppins-bold flex items-center gap-x-2 my-2">
+            <Image 
+              src={Logo}
+              alt="Medify Logo"
+              width={36}
+              height={36}
+            />
+            <p className="text-[18px]">Medify Chatbot</p>
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="mt-4">
               {items.map((item: any) => (
@@ -54,7 +63,7 @@ export function AppSidebar() {
                   <SidebarMenuButton asChild className="text-white hover:bg-white/25 hover:text-white">
                     <a href={item.url}>
                       <item.icon />
-                      <span>{item.title}</span>
+                      <span className="poppins-regular">{item.title}</span>
                     </a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

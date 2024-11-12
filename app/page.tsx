@@ -37,11 +37,20 @@ export default function Home() {
     "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Nulla aliquet porttitor venenatis. Donec a dui et dui fringilla consectetur id nec massa. Aliquam erat volutpat. Nulla facilisi. Cras fermentum odio eu feugiat. Vivamus eget sagittis quam. Vestibulum aliquam, enim non suscipit varius, ipsum mi venenatis justo, eu efficitur ligula ligula non libero."
   ];
   
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     const userMessage = { message: values.prompt, isUser: true };
 
-    const randomReply = autoReplies[Math.floor(Math.random() * autoReplies.length)];
-    const replyMessage = { message: randomReply, isUser: false };
+    const chatbotResponse = await fetch("http://localhost:8000/chatbot", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt: values.prompt }),
+    })
+
+    const data = await chatbotResponse.json();
+
+    const replyMessage = { message: data, isUser: false };
 
     setMessages((prevMessages) => [...prevMessages, userMessage]); 
     form.reset();

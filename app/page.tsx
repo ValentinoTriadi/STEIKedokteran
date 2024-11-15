@@ -45,7 +45,7 @@ export default function Home() {
     ]);
     setIsResponding(true);
 
-    const chatbotResponse = await fetch("http://localhost:8000/chatbot", {
+    const chatbotResponse = await fetch("/api/chatbot", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

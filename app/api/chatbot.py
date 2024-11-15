@@ -1,9 +1,9 @@
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 
 def load_model():
-    model_path = "maull04/chatbot_gpt2_healthcaremagic100"
-    tokenizer = AutoTokenizer.from_pretrained(model_path, use_fast=False)
-    model = AutoModelForCausalLM.from_pretrained(model_path)
+    model_name = "maull04/chatbot_gpt2_healthcaremagic100k"
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    model = AutoModelForCausalLM.from_pretrained(model_name)
     
     # Menambahkan pad_token jika tidak ada
     if tokenizer.pad_token is None:

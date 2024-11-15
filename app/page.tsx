@@ -12,7 +12,7 @@ import RightBubbleChat from "@/components/right-bubble-chat";
 import LeftBubbleChat from "@/components/left-bubble-chat";
 
 const formSchema = z.object({
-  prompt: z.string().min(1).max(255),
+  prompt: z.string().min(1),
 });
 
 export default function Home() {

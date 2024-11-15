@@ -12,11 +12,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
+@app.get("/api")
 def read_root():
   return {"Hello": "World"}
 
-@app.post("/chatbot")
+@app.post("/api/chatbot")
 async def chatbot(request: Request):
   data = await request.json()
   return chatbotResponse(data['prompt'])

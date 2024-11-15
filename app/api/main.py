@@ -18,7 +18,6 @@ def read_root():
 
 @app.post("/chatbot")
 async def chatbot(request: Request):
-  print(request)
   data = await request.json()
   return chatbotResponse(data['prompt'])
 

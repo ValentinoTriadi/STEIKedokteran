@@ -1,4 +1,5 @@
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
+from deep_translator import GoogleTranslator
 
 def load_model():
     model_name = "maull04/chatbot_gpt2_healthcaremagic100k"
@@ -15,12 +16,21 @@ def load_model():
 
 text_gen_pipeline = load_model()
 
+entranslator = GoogleTranslator(source='auto', target='en')
+idtranslator = GoogleTranslator(source='auto', target='id')
+
 def chatbotResponse(prompt):
+    # Translate the prompt to English
+    
+    prompt = entranslator.translate(prompt)
+
     formatted_prompt = (
       "Instruction: If you are a doctor, please answer the medical questions based on the patient's description.\n"
       f"Input: {prompt}\nResponse:"
     )
     response = text_gen_pipeline(formatted_prompt, max_length=512, do_sample=True, num_return_sequences=1, truncation=False)
     generated_text = response[0]['generated_text'].split("Response:")[-1].strip()
+
+    generated_text = idtranslator.translate(generated_text)
 
     return generated_text

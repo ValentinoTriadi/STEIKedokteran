@@ -1,11 +1,13 @@
 'use client'
 
+// Assets Import
 import Image from "next/image"
 import Logo from '@/public/LogoColor.png'
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
-import { Calculator } from 'lucide-react';
-import { Bell } from 'lucide-react';
 
+// Icons Import
+import { Calculator, ShieldCheck, Home, Bell } from "lucide-react"
+
+// Components Import
 import {
   Sidebar,
   SidebarContent,
@@ -32,9 +34,12 @@ const items = [
     title: "Pengingat Obat",
     url: "/pengingat-obat",
     icon: Bell,
+  },
+  {
+    title: "Cek Stres",
+    url: "/cek-stres",
+    icon: ShieldCheck
   }
-  
-
 ]
 
 export function AppSidebar() {

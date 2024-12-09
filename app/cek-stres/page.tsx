@@ -2,6 +2,11 @@
 
 import React, { useState } from "react";
 
+// Components Import
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+
 const StressCheckPage: React.FC = () => {
   const questions = [
     { id: 1, text: "Saya merasa mudah lelah.", options: ["Tidak Pernah", "Kadang-Kadang", "Sering", "Sangat Sering"] },
@@ -28,41 +33,41 @@ const StressCheckPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <div className="bg-white shadow-md rounded-lg p-6 max-w-lg mx-auto">
-        <h1 className="text-2xl font-bold mb-4 text-center">Cek Stres</h1>
+    <div className="min-h-[90%] flex items-center justify-center px-8">
+      <Card className="bg-white p-8 mx-auto">
+        <h1 className="text-2xl font-bold mb-4 text-center poppins-regular text-[#5a56f4]">Cek Stres</h1>
         {questions.map((question, index) => (
           <div key={question.id} className="mb-4">
-            <p className="text-lg font-medium">{question.text}</p>
+            <p className="poppins-regular">{question.text}</p>
             <div className="flex space-x-2 mt-2">
               {question.options.map((option, optionIndex) => (
-                <button
+                <Button
                   key={optionIndex}
                   onClick={() => handleAnswerChange(index, optionIndex)}
-                  className={`px-4 py-2 rounded-md text-sm font-medium ${
+                  className={`px-4 py-2 rounded-md text-sm poppins-regular ${
                     answers[index] === optionIndex
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-200 text-gray-700"
+                      ? "bg-[#5a56f4] text-white hover:bg-[#5a56f4]/90"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
                   {option}
-                </button>
+                </Button>
               ))}
             </div>
           </div>
         ))}
-        <button
+        <Button
           onClick={calculateStressLevel}
-          className="w-full bg-blue-500 text-white font-medium py-2 rounded-md mt-4 hover:bg-blue-600"
+          className="poppins-regular w-full bg-[#5a56f4] text-white font-medium py-2 rounded-md mt-4 hover:bg-[#5a56f4]/90"
         >
           Hitung Tingkat Stres
-        </button>
+        </Button>
         {result && (
-          <div className="mt-6 p-4 bg-gray-100 rounded-md text-center">
-            <p className="text-lg font-medium">{result}</p>
+          <div className="mt-6 p-4 bg-gray-100 rounded-md text-center border-2 border-[#5a56f4]">
+            <p className="text-[#5a56f4] poppins-regular">{result}</p>
           </div>
         )}
-      </div>
+      </Card>
     </div>
   );
 };

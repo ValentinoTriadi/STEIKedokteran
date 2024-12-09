@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
+// Components Import
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/app-sidebar";
+import { Toaster } from "@/components/ui/toaster"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,11 +32,12 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <SidebarProvider>
-        <AppSidebar />
+          <AppSidebar />
           <main className="w-full">
             <SidebarTrigger />
             {children}
           </main>
+          <Toaster />
         </SidebarProvider>
       </body>
     </html>

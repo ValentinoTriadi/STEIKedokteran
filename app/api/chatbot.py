@@ -28,7 +28,7 @@ system_prompt = (
 )
 
 # Generate chatbot response
-def chatbotResponse(user_input, max_tokens=1024):
+def chatbotResponse(user_input, max_tokens=2048):
     device = "cuda" if torch.cuda.is_available() else "cpu"
     
     # Format the conversation with the system prompt
@@ -52,14 +52,8 @@ def chatbotResponse(user_input, max_tokens=1024):
     generated_ids = model.generate(
         input_ids,
         max_new_tokens=max_tokens,
-        no_repeat_ngram_size=2,  # Prevent repetitive phrases
-        repetition_penalty=1.2,  # Penalize repetitive sequences
-        eos_token_id=tokenizer.eos_token_id,  # Ensure proper ending
-        pad_token_id=tokenizer.pad_token_id,  # Use pad token for padding
-        truncation=False  # Ensure output isn't truncated
     )
 
-    
     # Post-process the generated tokens
     generated_ids = [
         output_ids[len(input_ids):] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)

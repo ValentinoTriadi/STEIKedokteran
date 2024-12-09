@@ -1,6 +1,11 @@
 "use client";
 
-import { useState } from 'react';
+import { useState } from "react";
+
+// Components Import
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 type Reminder = {
   id: number;
@@ -10,14 +15,14 @@ type Reminder = {
 };
 
 const MedicineReminder: React.FC = () => {
-  const [medicineName, setMedicineName] = useState<string>('');
-  const [dosage, setDosage] = useState<number | ''>('');
-  const [time, setTime] = useState<string>('');
+  const [medicineName, setMedicineName] = useState<string>("");
+  const [dosage, setDosage] = useState<number | "">("");
+  const [time, setTime] = useState<string>("");
   const [reminders, setReminders] = useState<Reminder[]>([]);
 
   const handleAddReminder = () => {
     if (!medicineName || !dosage || !time) {
-      alert('Please fill out all fields!');
+      alert("Please fill out all fields!");
       return;
     }
 
@@ -29,9 +34,9 @@ const MedicineReminder: React.FC = () => {
     };
 
     setReminders([...reminders, newReminder]);
-    setMedicineName('');
-    setDosage('');
-    setTime('');
+    setMedicineName("");
+    setDosage("");
+    setTime("");
   };
 
   const handleDeleteReminder = (id: number) => {
@@ -39,81 +44,95 @@ const MedicineReminder: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
-      <div className="w-full max-w-lg bg-white rounded-lg shadow-md p-6">
-        <h1 className="text-2xl font-bold text-center mb-6">Pengingat Obat</h1>
+    <div className="min-h-[90%] flex items-center justify-center px-8">
+      <Card className="w-full max-w-5xl p-8 flex flex-col lg:flex-row gap-8">
+        {/* Form Input */}
+        <div className="flex-1">
+          <h1 className="text-2xl font-bold text-center mb-6 poppins-regular text-[#5a56f4]">
+            Pengingat Obat
+          </h1>
 
-        {/* Input Fields */}
-        <div className="space-y-4">
-          <div>
-            <label htmlFor="medicineName" className="block text-sm font-medium text-gray-700">
-              Nama Obat
-            </label>
-            <input
-              type="text"
-              id="medicineName"
-              value={medicineName}
-              onChange={(e) => setMedicineName(e.target.value)}
-              placeholder="Masukkan nama obat"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            />
+          <div className="space-y-4">
+            <div className="space-y-2 poppins-regular">
+              <label
+                htmlFor="medicineName"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Nama Obat
+              </label>
+              <Input
+                type="text"
+                id="medicineName"
+                value={medicineName}
+                onChange={(e) => setMedicineName(e.target.value)}
+                placeholder="Masukkan nama obat"
+                className="mt-1 block w-full sm:text-sm focus-visible:ring-transparent"
+              />
+            </div>
+
+            <div className="space-y-2 poppins-regular">
+              <label
+                htmlFor="dosage"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Dosis Per Hari
+              </label>
+              <Input
+                type="number"
+                id="dosage"
+                value={dosage || ""}
+                onChange={(e) => setDosage(Number(e.target.value))}
+                placeholder="Masukkan dosis"
+                className="mt-1 block w-full sm:text-sm focus-visible:ring-transparent"
+              />
+            </div>
+
+            <div className="space-y-2 poppins-regular">
+              <label
+                htmlFor="time"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Jam Pengingat
+              </label>
+              <Input
+                type="time"
+                id="time"
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+                className="mt-1 block w-full rounded-md focus-visible:ring-transparent sm:text-sm"
+              />
+            </div>
           </div>
 
-          <div>
-            <label htmlFor="dosage" className="block text-sm font-medium text-gray-700">
-              Dosis Per Hari
-            </label>
-            <input
-              type="number"
-              id="dosage"
-              value={dosage || ''}
-              onChange={(e) => setDosage(Number(e.target.value))}
-              placeholder="Masukkan dosis"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="time" className="block text-sm font-medium text-gray-700">
-              Jam Pengingat
-            </label>
-            <input
-              type="time"
-              id="time"
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            />
-          </div>
+          <Button
+            onClick={handleAddReminder}
+            className="mt-4 poppins-regular w-full py-2 px-4 bg-[#5a56f4] text-white font-medium rounded-md hover:bg-[#5a56f4]/90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          >
+            Tambahkan Pengingat
+          </Button>
         </div>
 
-        {/* Add Button */}
-        <button
-          onClick={handleAddReminder}
-          className="mt-6 w-full py-2 px-4 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-        >
-          Tambahkan Pengingat
-        </button>
-
         {/* Reminder List */}
-        <div className="mt-6">
-          <h2 className="text-xl font-semibold mb-4">Daftar Pengingat</h2>
+        <div className="flex-1">
+          <h2 className="text-xl font-semibold mb-4 text-[#5a56f4] poppins-regular">
+            Daftar Pengingat
+          </h2>
           {reminders.length > 0 ? (
             <ul className="space-y-4">
               {reminders.map((reminder) => (
                 <li
                   key={reminder.id}
-                  className="flex justify-between items-center bg-gray-50 p-4 rounded-md shadow-sm"
+                  className="flex justify-between items-center bg-[#5a56f4] p-4 rounded-md shadow-sm"
                 >
-                  <div>
+                  <div className="poppins-regular text-white">
                     <p className="text-lg font-medium">{reminder.medicineName}</p>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-white/90">
                       {reminder.dosage} kali sehari - {reminder.time}
                     </p>
                   </div>
                   <button
                     onClick={() => handleDeleteReminder(reminder.id)}
-                    className="text-red-600 hover:underline"
+                    className="text-red-600 bg-white rounded-full px-4 py-2 text-sm"
                   >
                     Hapus
                   </button>
@@ -121,10 +140,10 @@ const MedicineReminder: React.FC = () => {
               ))}
             </ul>
           ) : (
-            <p className="text-gray-500">Belum ada pengingat yang ditambahkan.</p>
+            <p className="text-gray-500 poppins-regular">Belum ada pengingat yang ditambahkan.</p>
           )}
         </div>
-      </div>
+      </Card>
     </div>
   );
 };

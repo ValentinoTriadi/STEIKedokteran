@@ -3,6 +3,9 @@
 import Image from "next/image"
 import Logo from '@/public/LogoColor.png'
 import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import { Calculator } from 'lucide-react';
+import { Bell } from 'lucide-react';
+
 import {
   Sidebar,
   SidebarContent,
@@ -17,9 +20,21 @@ import {
 const items = [
   {
     title: "Home",
-    url: "#",
+    url: "/",
     icon: Home,
+  },
+  {
+    title: "Kalkulator BMI",
+    url: "/kalkulator-bmi",
+    icon: Calculator,
+  },
+  {
+    title: "Pengingat Obat",
+    url: "/pengingat-obat",
+    icon: Bell,
   }
+  
+
 ]
 
 export function AppSidebar() {
